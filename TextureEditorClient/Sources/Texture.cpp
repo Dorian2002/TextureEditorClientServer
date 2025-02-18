@@ -76,19 +76,21 @@ bool Texture::LoadTextureFromMemory(const void* data, size_t data_size, int* out
     return true;
 }
 
-void Texture::GeneratePerlinTexture(int width, int height) 
+void Texture::GeneratePerlinTexture(int width, int height)
 {
     std::vector<unsigned char> noiseData(width * height * 4);
 
     FastNoiseLite noise;
     noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 
+    /* Generate a value for each pixel */
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             float value = noise.GetNoise((float)x, (float)y);
             value = (value + 1.0f) / 2.0f; // Normaliser entre 0 et 1
             unsigned char pixel = static_cast<unsigned char>(value * 255);
 
+            /* Set RGBA value */
             int index = (y * width + x) * 4;
             noiseData[index] = pixel;
             noiseData[index + 1] = pixel;

@@ -21,20 +21,8 @@
 #include "queue"
 #include "list"
 #include "../TextureEditorBusiness/Operator.h"
-
-struct Rgba
-{
-	float r;
-	float g;
-	float b;
-	float a;
-};
-
-struct Draft
-{
-	std::queue<std::vector<Rgba>> image;
-	std::list<Operator> operators;
-};
+#include "../TextureEditorBusiness/PerlinOperatorClient.h"
+#include "../TextureEditorBusiness/DraftClient.h"
 
 struct DataShape
 {
@@ -70,12 +58,12 @@ struct DataShape
 	std::vector<Buffers*>* buf;
 };
 
-float vertices[15] = {
-	 0.0f,  0.5f, 1.0f, 0.0f, 0.0f,
-	-0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-	 0.5f, -0.5f, 0.0f, 0.0f, 1.0f
-};
-
+/*
+ /Brief : function that load data into opengl to prepare a rectangle draw
+  vsSrc : vertex shader
+  fsSrc : fragment shader
+  x, y  : position where render the shape
+*/
 DataShape* buildRectangle(File* vsSrc, File* fsSrc, float x, float y)
 {
 	float vertices[28] = {
@@ -115,6 +103,10 @@ DataShape* buildRectangle(File* vsSrc, File* fsSrc, float x, float y)
 	//m_drawList.push_back(new DataShape(vao, shader, 6, buffers));
 }
 
+/*
+ /Brief : function that load data into opengl to draw a rectangle
+  shapeToRender : data of the shape
+*/
 void drawTriangle(DataShape* shapeToRender)
 {
 	//glBindTexture(GL_TEXTURE_2D, shapeToRender->texture->textureId);
@@ -126,6 +118,9 @@ void drawTriangle(DataShape* shapeToRender)
 
 }
 
+/*
+ /Brief : Function that load an open gl texture into imgui frame 
+*/
 void DrawImgui(Texture* TextureToRender)
 {
 
@@ -151,26 +146,6 @@ void DrawImgui(Texture* TextureToRender)
 		ImVec2(1, 0)
 	);
 	ImGui::End();
-}
-
-std::vector<float> MakeNoise()
-{
-	// Create and configure FastNoise object
-	FastNoiseLite noise;
-	noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
-
-	// Gather noise data
-	std::vector<float> noiseData(128 * 128);
-	int index = 0;
-
-	for (int y = 0; y < 128; y++)
-	{
-		for (int x = 0; x < 128; x++)
-		{
-			noiseData[index++] = noise.GetNoise((float)x, (float)y);
-		}
-	}
-	return noiseData;
 }
 
 int main()
@@ -220,13 +195,16 @@ int main()
 #endif
 	ImGui_ImplOpenGL3_Init("#version 460");
 
-	int w, h;
+	/* Create clientDraft to get client method */
+	//DraftClient* clientDraft = new DraftClient();
+	//PerlinOperatorClient* perlinOp = new PerlinOperatorClient();
+	//clientDraft->AddOperator(perlinOp);
+	//perlinOp->Activate(clientDraft);
 
+	/* Create Texture */
 	Texture* T = new Texture();
-	//std::vector<float> noise = MakeNoise();
 	T->GeneratePerlinTexture(128,128);
 
-	//glfwGetWindowSize(window, &w, &h);
 	do
 	{
 		glfwPollEvents();
@@ -249,6 +227,8 @@ int main()
 		glfwWindowShouldClose(window) == 0);
 
 	delete T;
+	//delete perlinOp;
+	//delete clientDraft;
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();

@@ -9,7 +9,13 @@
 
 class DraftClient : Draft
 {
-	std::queue<std::vector<Rgba>> images;
+
+public :
+
+
+	std::queue<std::vector<unsigned char>> images;
 	std::list<Operator*> operators;
+
+	void AddOperator(Operator* op);
 };
 
