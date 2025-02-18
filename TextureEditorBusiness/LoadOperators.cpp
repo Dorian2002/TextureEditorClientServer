@@ -8,5 +8,5 @@ LoadOperators::LoadOperators(DraftManager* draftManager)
 
 bool LoadOperators::LoadDraft(Draft draft, std::list<Operator>& operators)
 {
-	m_draftManager->TryGetDraft(draft, operators);
+	return m_draftManager->TryGetDraft(draft, operators);
 }
