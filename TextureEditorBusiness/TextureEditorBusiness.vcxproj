@@ -157,14 +157,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DraftClient.h" />
     <ClInclude Include="DraftManager.h" />
     <ClInclude Include="FastNoiseLite.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Draft.h" />
+    <ClInclude Include="LoadOperators.h" />
     <ClInclude Include="Operator.h" />
-    <ClInclude Include="PerlinOperatorData.h" />
+    <ClInclude Include="PerlinOperatorClient.h" />
     <ClInclude Include="PerlinOperators.h" />
-    <ClInclude Include="SavesOperator.h" />
+    <ClInclude Include="Rgba.h" />
+    <ClInclude Include="SaveOperators.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Draft.cpp">
@@ -172,12 +175,10 @@
       </PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="DraftClient.cpp" />
     <ClCompile Include="DraftManager.cpp" />
+    <ClCompile Include="LoadOperators.cpp" />
     <ClCompile Include="Operator.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="PerlinOperatorData.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
@@ -185,7 +186,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="SavesOperator.cpp">
+    <ClCompile Include="Rgba.cpp" />
+    <ClCompile Include="SaveOperators.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
