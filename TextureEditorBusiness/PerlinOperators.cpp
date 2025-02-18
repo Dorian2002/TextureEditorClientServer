@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "PerlinOperators.h"
 
 PerlinOperator PerlinOperators::RegisterOperator(int octave, float frequence)

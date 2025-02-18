@@ -6,10 +6,19 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorNetcode", "TextureEditorNetcode\TextureEditorNetcode.vcxproj", "{077F8B50-86CD-4CB3-A86D-045F5B9E4F02}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorBusiness", "TextureEditorBusiness\TextureEditorBusiness.vcxproj", "{88CB16AA-8E28-4BD6-9AAC-A9BD454C0FAE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{077F8B50-86CD-4CB3-A86D-045F5B9E4F02} = {077F8B50-86CD-4CB3-A86D-045F5B9E4F02}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorClient", "TextureEditorClient\TextureEditorClient.vcxproj", "{84BB03A5-256E-4409-B300-87D75279BE9F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{077F8B50-86CD-4CB3-A86D-045F5B9E4F02} = {077F8B50-86CD-4CB3-A86D-045F5B9E4F02}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorServer", "TextureEditorServer\TextureEditorServer.vcxproj", "{169E4563-85EF-4508-9F52-19941F1464AD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{077F8B50-86CD-4CB3-A86D-045F5B9E4F02} = {077F8B50-86CD-4CB3-A86D-045F5B9E4F02}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
