@@ -2,10 +2,12 @@
 
 #include "PerlinOperators.h"
 
-class PerlinOperatorData : PerlinOperator
+class PerlinOperatorClient : PerlinOperator
 {
 public:
 	int octave;
 	float frequence;
+
+	void Apply();
 };
 
