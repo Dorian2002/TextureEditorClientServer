@@ -17,6 +17,24 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "File.h"
+#include "../TextureEditorBusiness/FastNoiseLite.h"
+#include "queue"
+#include "list"
+#include "../TextureEditorBusiness/Operator.h"
+
+struct Rgba
+{
+	float r;
+	float g;
+	float b;
+	float a;
+};
+
+struct Draft
+{
+	std::queue<std::vector<Rgba>> image;
+	std::list<Operator> operators;
+};
 
 struct DataShape
 {
@@ -108,7 +126,7 @@ void drawTriangle(DataShape* shapeToRender)
 
 }
 
-void DrawImgui(DataShape* shapeToRender)
+void DrawImgui(Texture* TextureToRender)
 {
 
 	ImGui::Begin("My Scene");
@@ -118,7 +136,6 @@ void DrawImgui(DataShape* shapeToRender)
 	const float window_height = ImGui::GetContentRegionAvail().y;
 
 	// we rescale the framebuffer to the actual window size here and reset the glViewport 
-	drawTriangle(shapeToRender);
 	glViewport(0, 0, window_width, window_height);
 
 	// we get the screen position of the window
@@ -127,25 +144,33 @@ void DrawImgui(DataShape* shapeToRender)
 	// and here we can add our created texture as image to ImGui
 	// unfortunately we need to use the cast to void* or I didn't find another way tbh
 	ImGui::GetWindowDrawList()->AddImage(
-		0,
+		TextureToRender->textureId,
 		ImVec2(pos.x, pos.y),
 		ImVec2(pos.x + window_width, pos.y + window_height),
 		ImVec2(0, 1),
 		ImVec2(1, 0)
 	);
-	//if (ImGui::Begin("Global"))
-	//{
-	//	if (ImGui::BeginTabBar("Tabs"))
-	//	{
-	//		if (ImGui::BeginTabItem("Edit"))
-	//		{
-	//			ImGui::EndTabItem();
-	//		}
-
-	//		ImGui::EndTabBar();
-	//	}
-	//}
 	ImGui::End();
+}
+
+std::vector<float> MakeNoise()
+{
+	// Create and configure FastNoise object
+	FastNoiseLite noise;
+	noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+
+	// Gather noise data
+	std::vector<float> noiseData(128 * 128);
+	int index = 0;
+
+	for (int y = 0; y < 128; y++)
+	{
+		for (int x = 0; x < 128; x++)
+		{
+			noiseData[index++] = noise.GetNoise((float)x, (float)y);
+		}
+	}
+	return noiseData;
 }
 
 int main()
@@ -195,14 +220,13 @@ int main()
 #endif
 	ImGui_ImplOpenGL3_Init("#version 460");
 
-	File* vsSrc = new File("Shaders\\vsSrc.txt");
-
-	File* fsSrc = new File("Shaders\\fsSrc.txt");
-
 	int w, h;
-	DataShape* shape = buildRectangle(vsSrc, fsSrc, 0, 0);
 
-	glfwGetWindowSize(window, &w, &h);
+	Texture* T = new Texture();
+	//std::vector<float> noise = MakeNoise();
+	T->GeneratePerlinTexture(128,128);
+
+	//glfwGetWindowSize(window, &w, &h);
 	do
 	{
 		glfwPollEvents();
@@ -214,7 +238,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//drawTriangle(shape);
-		DrawImgui(shape);
+		DrawImgui(T);
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -224,7 +248,7 @@ int main()
 	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
 
-	delete shape;
+	delete T;
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
