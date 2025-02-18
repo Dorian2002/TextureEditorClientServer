@@ -3,13 +3,19 @@
 #include "Operator.h"
 #include <mutex>
 #include <list>
+#include "Draft.h"
+
+class DraftManager;
 
 //From Operator.h
 CREATE_OPERATOR_CLASS(SaveOperator);
 
 class SavesOperator
 {
-	std::mutex operatorMutex;
-	std::unordered_map<_GUID*, std::list<Operator*>> saves;
+	DraftManager* m_draftManager;
+
+	SavesOperator(DraftManager* draftManager);
+
+	void SaveDraft(Draft draft, std::list<Operator> operators);
 };
 

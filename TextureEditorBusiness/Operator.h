@@ -6,15 +6,15 @@
 class Operator
 {
 private:
-    _GUID* id;
+    _GUID* m_id;
 public:
 	Operator() {
-        if (CoCreateGuid(id) != S_OK) {
+        if (CoCreateGuid(m_id) != S_OK) {
             throw;
         }
     }
     _GUID* GetId() const {
-        return id;
+        return m_id;
     }
 };
 

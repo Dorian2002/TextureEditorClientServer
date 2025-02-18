@@ -8,9 +8,9 @@ CREATE_OPERATOR_CLASS(PerlinOperator);
 
 class PerlinOperators
 {
-	std::mutex operatorMutex;
-	std::unordered_map<_GUID*, int> octaves;
-	std::unordered_map<_GUID*, float> frequences;
+	std::mutex m_operatorMutex;
+	std::unordered_map<_GUID*, int> m_octaves;
+	std::unordered_map<_GUID*, float> m_frequences;
 
 
 	/// <summary>
