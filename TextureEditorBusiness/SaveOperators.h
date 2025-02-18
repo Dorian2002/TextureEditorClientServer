@@ -10,12 +10,12 @@ class DraftManager;
 //From Operator.h
 CREATE_OPERATOR_CLASS(SaveOperator);
 
-class SavesOperator
+class SaveOperators
 {
 	DraftManager* m_draftManager;
 
-	SavesOperator(DraftManager* draftManager);
-
+	SaveOperators(DraftManager* draftManager);
+public:
 	void SaveDraft(Draft draft, std::list<Operator> operators);
 };
 
