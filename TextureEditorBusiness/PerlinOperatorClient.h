@@ -7,7 +7,5 @@ class PerlinOperatorClient : PerlinOperator
 public:
 	int octave;
 	float frequence;
-
-	void Apply();
 };
 

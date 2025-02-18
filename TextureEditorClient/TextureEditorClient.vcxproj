@@ -173,6 +173,7 @@
     <ClCompile Include="Sources\Texture.cpp" />
     <ClCompile Include="Sources\Vao.cpp" />
     <ClCompile Include="TextureEditorClient.cpp" />
+    <ClCompile Include="TextureEditorDataStore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Buffers.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="TextureEditorDataStore.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,6 +12,8 @@ class PerlinOperators
 	std::unordered_map<_GUID*, int> m_octaves;
 	std::unordered_map<_GUID*, float> m_frequences;
 
+public:
+	PerlinOperators();
 
 	/// <summary>
 	/// Register a new Perlin Operator

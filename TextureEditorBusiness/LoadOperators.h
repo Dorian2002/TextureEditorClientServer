@@ -13,8 +13,8 @@ CREATE_OPERATOR_CLASS(LoadOperator);
 class LoadOperators
 {
 	DraftManager* m_draftManager;
-	LoadOperators(DraftManager* draftManager);
 public:
+	LoadOperators(DraftManager* draftManager);
 	bool LoadDraft(Draft draft, std::list<Operator>& operators);
 };
 

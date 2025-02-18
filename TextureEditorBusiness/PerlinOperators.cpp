@@ -1,5 +1,9 @@
 #include "PerlinOperators.h"
 
+PerlinOperators::PerlinOperators()
+{
+}
+
 PerlinOperator PerlinOperators::RegisterOperator(int octave, float frequence)
 {
 	//Creates a new Perlin Operator

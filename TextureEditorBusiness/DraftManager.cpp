@@ -1,5 +1,9 @@
 #include "DraftManager.h"
 
+DraftManager::DraftManager()
+{
+}
+
 /// <summary>
 /// Returns, in the passed list, all Operators used by the specified draft 
 /// </summary>
