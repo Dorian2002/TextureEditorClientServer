@@ -182,6 +182,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="PerlinOperatorClient.cpp" />
     <ClCompile Include="PerlinOperators.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>

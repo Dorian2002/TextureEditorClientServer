@@ -6,7 +6,7 @@
 class Draft
 {
 private:
-    _GUID* m_id;
+    _GUID* m_id = new _GUID();
 public:
 	Draft() {
         if (CoCreateGuid(m_id) != S_OK) {

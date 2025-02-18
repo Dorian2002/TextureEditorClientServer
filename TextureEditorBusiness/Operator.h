@@ -3,10 +3,12 @@
 #include "guiddef.h"
 #include "combaseapi.h"
 
+class DraftClient;
+
 class Operator
 {
 private:
-    _GUID* m_id;
+    _GUID* m_id = new _GUID();
 public:
 	Operator() {
         if (CoCreateGuid(m_id) != S_OK) {
@@ -16,13 +18,15 @@ public:
     _GUID* GetId() const {
         return m_id;
     }
+
+    virtual void Activate(DraftClient*) {};
 };
 
 // Macro to create a derived class
-#define CREATE_OPERATOR_CLASS(className)      \
-class className : public Operator {           \
+#define CREATE_OPERATOR_CLASS(CLASSNAME)      \
+class CLASSNAME : public Operator {           \
 public:                                       \
-    className() : Operator() {}               \
+    struct Data {};                           \
+    CLASSNAME() : Operator() {}               \
+    void Activate(DraftClient*) override {};  \
 };
-
-
